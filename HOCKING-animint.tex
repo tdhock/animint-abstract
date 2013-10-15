@@ -1,0 +1,86 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage{amsfonts, amsmath, hanging, hyperref, natbib, parskip, times}
+\usepackage[pdftex]{graphicx}
+\hypersetup{
+  colorlinks,
+  linkcolor=blue,
+  urlcolor=blue
+}
+
+\let\section=\subsubsection
+\newcommand{\pkg}[1]{{\normalfont\fontseries{b}\selectfont #1}} 
+\let\proglang=\textit
+\let\code=\texttt 
+\renewcommand{\title}[1]{\begin{center}{\bf \LARGE #1}\end{center}}
+\newcommand{\affiliations}{\footnotesize}
+\newcommand{\keywords}{\paragraph{Keywords:}}
+
+\setlength{\topmargin}{-15mm}
+\setlength{\oddsidemargin}{-2mm}
+\setlength{\textwidth}{165mm}
+\setlength{\textheight}{250mm}
+
+\begin{document}
+\pagestyle{empty}
+
+\title{Two new aesthetics define a grammar of interactive graphics}
+
+\begin{center}
+  {\bf Toby Dylan Hocking$^{1,^\star}$}
+\end{center}
+
+\begin{affiliations}
+  1. Department of Computer Science, Tokyo Institute of Technology \\[-2pt]
+  $^\star$Contact author:
+  \href{mailto:toby@sg.cs.titech.ac.jp}{toby@sg.cs.titech.ac.jp}
+\end{affiliations}
+
+\keywords Interactive, Animated, Graphics, Time Series, Visualization
+
+\vskip 0.8cm
+
+\textbf{Motivation}: the \pkg{ggplot2} package defines a grammar that
+can be used to produce many statistical graphics
+\citep{ggplot2}. Although various other \proglang{R} packages can be
+used to produce animated or interactive graphics, the powerful
+grammar of \pkg{ggplot2} can not be used for this purpose.
+
+The \pkg{D3} library for \proglang{Javascript} can be used to make
+statistical graphics that are animated, interactive, and viewable in a
+web browser \citep{D3}. However, most useRs do not have the time to
+write Javascript code for everyday visualizations.
+
+\textbf{Proposal}: define interactive animations entirely in R code by
+adding 2 new aesthetics to the grammar of graphics:
+\begin{itemize}
+\item \code{showSelected=variable} means that only the subset of the
+  data that corresponds to the selected value of \code{variable} will
+  be shown.
+\item \code{clickSelects=variable} means that clicking a plot element
+  will change the currently selected value of \code{variable}.
+\end{itemize}
+
+In this talk I will show how an interactive animation can be defined
+as a list of ggplots with these aesthetics, then automatically
+translated into a D3 visualization. Demo code and examples can be
+found here.
+
+\url{http://sugiyama-www.cs.titech.ac.jp/~toby/animint/index.html}
+
+%% references: 
+\bibliographystyle{chicago}
+\bibliography{refs}
+
+%% references can alternatively be entered by hand
+%\subsubsection*{References}
+
+%\begin{hangparas}{.25in}{1}
+%AuthorA (2007). Title of a web resource, \url{http://url/of/resource/}.
+
+%AuthorC (2008a). Article example in proceedings. In \textit{useR! 2008, The R
+%User Conference, (Dortmund, Germany)}, pp. 31--37.
+
+%AuthorC (2008b). Title of an article. \textit{Journal name 6}, 13--17.
+%\end{hangparas}
+
+\end{document}
